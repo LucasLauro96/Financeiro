@@ -1,0 +1,54 @@
+@charset "UTF-8";
+
+/* VARIÁVEIS */
+:root {
+  --cor_clara: #263238;
+  --cor_escura: #212121;
+}
+
+@import url('https://fonts.googleapis.com/css?family=Dosis');
+
+/* MENU SUPERIOR */
+.app-header{
+	background-color: var(--cor_clara);
+}
+
+/* FUNDO DO LOGO */
+.app-header__logo{
+	background-color: var(--cor_clara);
+}
+
+@media (min-width: 768px) {
+	.app-header__logo{
+		background-color: var(--cor_escura);
+	}
+}
+
+/* BOTÃO MENU RESPONSIVO */
+.app-sidebar__toggle:focus, .app-sidebar__toggle:hover{
+	background-color: var(--cor_clara);
+}
+
+/* MENU LATERAL */
+.app-menu__item.active, .app-menu__item:hover, .app-menu__item:focus{
+	border-left-color: var(--cor_clara);
+}
+
+.treeview.is-expanded [data-toggle='treeview']{
+	border-left-color: var(--cor_clara);
+}
+
+/* LOGIN */
+.material-half-bg .cover{
+	background-color: var(--cor_clara);
+}
+
+.login-box .btn-primary{
+	background-color: var(--cor_clara);
+	border-color: var(--cor_escura);
+}
+
+/*
+.app-header__logo{
+	font-family: 'Sans-serif';
+}
