@@ -8,7 +8,7 @@ $autenticacao->verifica_sessao(basename($_SERVER['PHP_SELF']));
 $conexao = new conexao();
 $con = $conexao->conecta();
 
-$pageActive = 'despesas';
+$pageActive = 'banco';
 
 ?>
 <!DOCTYPE html>
@@ -38,10 +38,10 @@ $pageActive = 'despesas';
 			<div class="col-md-12">
 				<div class="tile">
 					<div class="tile-title-w-btn">
-						<h3 class="title"><i class="fa fa-list"></i> Produtos</h3>
+						<h3 class="title"><i class="fa fa-list"></i> Bancos</h3>
 						<p>
-							<a href="despesas_cadastro.php" class="btn btn-primary icon-btn">
-								<i class="fa fa-plus"></i> Nova Despesa
+							<a href="banco_cadastro.php" class="btn btn-primary icon-btn">
+								<i class="fa fa-plus"></i> Novo Banco
 							</a>
 						</p>
 					</div>
@@ -49,9 +49,8 @@ $pageActive = 'despesas';
 						<table class="table table-hover table-bordered w-100" id="tabela">
 							<thead>
 								<tr>
-									<th>Id</th>
-									<th>Descricão</th>
-									<th>Ativo</th>
+									<th>BANCO</th>
+									<th>SALDO</th>
 									<th width="15%">AÇÕES</th>
 								</tr>
 							</thead>
@@ -59,10 +58,9 @@ $pageActive = 'despesas';
 								<tr>
 									<td class="align-middle"></td>
 									<td class="align-middle"></td>
-									<td class="align-middle"></td>
 									<td class="align-middle text-center">
-										<a href="produto_cadastro.php?CodProduto=" class="btn btn-primary" title="Editar Produto"><i class="fa fa-pencil fa-lg fa-fw mr-0"></i></a>
-										<button class="btn btn-danger" title="Excluir Despesa" onclick="deletaProduto(<?=$res->CodProduto?>)"><i class="fa fa-trash fa-lg fa-fw mr-0"></i></button>
+										<a href="banco_cadastro.php?CodBanco=" class="btn btn-primary" title="Editar Produto"><i class="fa fa-pencil fa-lg fa-fw mr-0"></i></a>
+										<button class="btn btn-danger" title="Excluir Banco" onclick="deletaProduto(<?=$res->CodBanco?>)"><i class="fa fa-trash fa-lg fa-fw mr-0"></i></button>
 									</td>
 								</tr>
 								</tbody>
@@ -91,9 +89,9 @@ $pageActive = 'despesas';
 				}
 			});
 
-			function deletaProduto(CodProduto){
+			function deletaProduto(CodBanco){
 				swal({
-					title: 'Deletar este produto?',
+					title: 'Deletar este Banco?',
 					text: '',
 					type: 'warning',
 					showCancelButton: true,
@@ -103,7 +101,7 @@ $pageActive = 'despesas';
 					closeOnCancel: true
 				}, function(isConfirm){
 					if(isConfirm){
-						$.post('ajax/produto.php?option=delete', {CodProduto: CodProduto})
+						$.post('ajax/banco.php?option=delete', {CodBanco: CodBanco})
 						.done(function(){
 							location.reload();
 						});

@@ -25,7 +25,8 @@ if(isset($_POST['sair']))
 	</div>
 	<ul class="app-menu">
 		<li><a class="app-menu__item" href="index.php" data-active="index"><i class="app-menu__icon fa fa-dashboard"></i><span class="app-menu__label">Dashboard</span></a></li>
-		<li><a class="app-menu__item" href="despesas_consulta.php" data-active="despesas"><i class="app-menu__icon fa fa-circle-o"></i><span class="app-menu__label">Produtos</span></a></li>
+		<li><a class="app-menu__item" href="despesas_consulta.php" data-active="despesas"><i class="app-menu__icon fa fa-circle-o"></i><span class="app-menu__label">Despesas</span></a></li>
+		<li><a class="app-menu__item" href="banco_consulta.php" data-active="banco"><i class="app-menu__icon fa fa-circle-o"></i><span class="app-menu__label">Bancos</span></a></li>
 	</ul>
 </aside>
 

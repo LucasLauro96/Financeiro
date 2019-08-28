@@ -31,14 +31,14 @@ $Imagem = isset($res->Imagem) ? $res->Imagem : null;
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name='viewport' content='width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=0'>
 	<!-- Main CSS-->
-	<link rel="stylesheet" type="text/css" href="assets/css/main.css">
+	<link rel="stylesheet" type="text/css" href="css/main.css">
 	<!-- Font-icon css-->
 	<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 	<!-- Favicon -->
 	<link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
 	<link rel="icon" href="../favicon.ico" type="image/x-icon">
 	<!-- Page specific css -->
-	<link rel="stylesheet" type="text/css" href="assets/css/jquery.fancybox.min.css">
+	<link rel="stylesheet" type="text/css" href="css/jquery.fancybox.min.css">
 </head>
 <body class="app sidebar-mini rtl">
 
@@ -99,7 +99,7 @@ $Imagem = isset($res->Imagem) ? $res->Imagem : null;
 							<div class="row">
 								<div class="col-md-3 mt-4">
 									<div class="card">
-										<a href="../assets/img/produto/<?= $res->Imagem ?>" data-fancybox="gallery"><img src="../assets/img/produto/<?= $res->Imagem ?>" class="img-card-top img-fluid"></a>
+										<a href="../img/produto/<?= $res->Imagem ?>" data-fancybox="gallery"><img src="../img/produto/<?= $res->Imagem ?>" class="img-card-top img-fluid"></a>
 									</div>
 								</div>
 							</div>
@@ -110,15 +110,15 @@ $Imagem = isset($res->Imagem) ? $res->Imagem : null;
 		<?php } ?>
 	</main>
 	<!-- Essential javascripts for application to work-->
-	<script src="assets/js/jquery-3.2.1.min.js"></script>
-	<script src="assets/js/popper.min.js"></script>
-	<script src="assets/js/bootstrap.min.js"></script>
-	<script src="assets/js/main.js"></script>
+	<script src="js/jquery-3.2.1.min.js"></script>
+	<script src="js/popper.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script src="js/main.js"></script>
 	<!-- The javascript plugin to display page loading on top-->
-	<script src="assets/js/plugins/pace.min.js"></script>
+	<script src="js/plugins/pace.min.js"></script>
 	<!-- Page specific javascripts-->
-	<script src="assets/js/plugins/jquery.validate.js"></script>
-	<script src="assets/js/plugins/jquery.fancybox.min.js"></script>
+	<script src="js/plugins/jquery.validate.js"></script>
+	<script src="js/plugins/jquery.fancybox.min.js"></script>
 	<script>
 		$('#formCadastro').validate({
 			errorClass: 'is-invalid',
