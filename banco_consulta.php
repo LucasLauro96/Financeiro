@@ -55,14 +55,25 @@ $pageActive = 'banco';
 								</tr>
 							</thead>
 							<tbody>
-								<tr>
-									<td class="align-middle"></td>
-									<td class="align-middle"></td>
-									<td class="align-middle text-center">
-										<a href="banco_cadastro.php?CodBanco=" class="btn btn-primary" title="Editar Produto"><i class="fa fa-pencil fa-lg fa-fw mr-0"></i></a>
-										<button class="btn btn-danger" title="Excluir Banco" onclick="deletaProduto(<?=$res->CodBanco?>)"><i class="fa fa-trash fa-lg fa-fw mr-0"></i></button>
-									</td>
-								</tr>
+								<?php 
+									$query = $con->query("
+										SELECT 
+											CodConta,
+											Banco,
+											Saldo
+										FROM
+											tb_conta");
+										
+									while($res = $query->fetch(PDO::FETCH_OBJ)){?>
+										<tr>
+											<td class="align-middle"><?= $res->Banco ?></td>
+											<td class="align-middle"><?= $res->Saldo ?></td>
+											<td class="align-middle text-center">
+												<a href="banco_cadastro.php?CodConta=<?=$res->CodConta?>" class="btn btn-primary" title="Editar Conta"><i class="fa fa-pencil fa-lg fa-fw mr-0"></i></a>
+												<button class="btn btn-danger" title="Excluir Conta" onclick="deletaProduto(<?= $res->CodConta ?>)"><i class="fa fa-trash fa-lg fa-fw mr-0"></i></button>
+											</td>
+										</tr>
+									<?php }?>
 								</tbody>
 							</table>
 						</div>
@@ -89,9 +100,9 @@ $pageActive = 'banco';
 				}
 			});
 
-			function deletaProduto(CodBanco){
+			function deletaProduto(CodConta){
 				swal({
-					title: 'Deletar este Banco?',
+					title: 'Deletar este Conta?',
 					text: '',
 					type: 'warning',
 					showCancelButton: true,
@@ -101,7 +112,7 @@ $pageActive = 'banco';
 					closeOnCancel: true
 				}, function(isConfirm){
 					if(isConfirm){
-						$.post('ajax/banco.php?option=delete', {CodBanco: CodBanco})
+						$.post('ajax/banco.php?option=delete', {CodConta: CodConta})
 						.done(function(){
 							location.reload();
 						});

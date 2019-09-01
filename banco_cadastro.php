@@ -38,7 +38,7 @@ $pageActive = 'banco';
 			<div class="col-md-12">
 				<div class="tile">
 					<div class="tile-title-w-btn">
-						<h3 class="title"><i class="fa fa-pencil"></i><?= empty($_GET['CodProduto']) ? '  Novo Banco' : '  Atualizar Banco' ?></h3>
+						<h3 class="title"><i class="fa fa-pencil"></i><?= empty($_GET['CodConta']) ? '  Novo Banco' : '  Atualizar Banco' ?></h3>
 						<p>
 							<a href="banco_consulta.php" class="btn btn-danger icon-btn">
 								<i class="fa fa-ban"></i> Cancelar
@@ -54,7 +54,7 @@ $pageActive = 'banco';
 								</div>
                                 <div class="form-group col-4">
 									<label for="Nome">SALDO</label>
-									<input type="number" name="Saldo" id="Saldo" class="form-control" required>
+									<input type="text" name="Saldo" id="Saldo" class="form-control" required>
 								</div>
 								<div class="col-md-12">
 									<button type="submit" name="salvar" id="salvar" class="btn btn-primary d-block mx-auto mt-3"><i class="fa fa-save"></i> SALVAR</button>
@@ -103,8 +103,8 @@ $pageActive = 'banco';
 			}
 		});
 
-        if(isset($_GET['CodConta']) && !empty($_GET['CodConta'])){
-            $.post('ajax/galeria.php?option=select', {CodConta: <?= $_GET['CodConta']?>})
+       <?php if(isset($_GET['CodConta']) && !empty($_GET['CodConta'])){?>
+            $.post('ajax/banco.php?option=select', {CodConta: <?= $_GET['CodConta']?>})
                 .done(function(response) {
                     response = JSON.parse(response);
 
@@ -112,7 +112,7 @@ $pageActive = 'banco';
                     $('#Banco').val(response.Banco);
                     $('#Saldo').val(response.Saldo);
                 });
-        }
+        <?php } ?>
 	</script>
 
 </body>
