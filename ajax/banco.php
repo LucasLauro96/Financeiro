@@ -29,10 +29,13 @@ if(!isset($_POST) || empty($_POST))
     if($_GET['option'] == 'insert'){
         if(!isset($_POST) || empty($_POST))
             exit('POST required');
+
+        $Saldo = str_replace('.', '', $_POST['Saldo']);
+        $Saldo = str_replace(',', '.', $Saldo);
     
         $query = $con->prepare('CALL STP_I_Conta(:Banco, :Saldo)');
         $query->bindValue(':Banco', $_POST['Banco']);
-        $query->bindValue(':Saldo', $_POST['Saldo']);
+        $query->bindValue(':Saldo', $Saldo);
         $query->execute();
         $res = $query->fetch(PDO::FETCH_OBJ);
         
@@ -43,11 +46,14 @@ if(!isset($_POST) || empty($_POST))
     if($_GET['option'] == 'update'){
         if(!isset($_POST) || empty($_POST))
             exit('POST required');
+
+        $Saldo = str_replace('.', '', $_POST['Saldo']);
+        $Saldo = str_replace(',', '.', $Saldo);
     
         $query = $con->prepare('CALL STP_U_Conta(:CodConta, :Banco, :Saldo)');
         $query->bindValue(':CodConta', $_POST['CodConta']);
         $query->bindValue(':Banco', $_POST['Banco']);
-        $query->bindValue(':Saldo', $_POST['Saldo']);
+        $query->bindValue(':Saldo', $Saldo);
         $query->execute();
         $res = $query->fetch(PDO::FETCH_OBJ);
         

@@ -54,7 +54,7 @@ $pageActive = 'banco';
 								</div>
                                 <div class="form-group col-4">
 									<label for="Nome">SALDO</label>
-									<input type="text" name="Saldo" id="Saldo" class="form-control" required>
+									<input type="text" name="Saldo" id="Saldo" class="form-control mask-valor" required>
 								</div>
 								<div class="col-md-12">
 									<button type="submit" name="salvar" id="salvar" class="btn btn-primary d-block mx-auto mt-3"><i class="fa fa-save"></i> SALVAR</button>
@@ -69,6 +69,7 @@ $pageActive = 'banco';
 	</main>
 	<!-- Essential javascripts for application to work-->
 	<script src="js/jquery-3.2.1.min.js"></script>
+	<script src="js/jquery.mask.min.js"></script>
 	<script src="js/popper.min.js"></script>
 	<script src="js/bootstrap.min.js"></script>
 	<script src="js/main.js"></script>

@@ -67,7 +67,7 @@ $pageActive = 'banco';
 									while($res = $query->fetch(PDO::FETCH_OBJ)){?>
 										<tr>
 											<td class="align-middle"><?= $res->Banco ?></td>
-											<td class="align-middle"><?= $res->Saldo ?></td>
+											<td class="align-middle"  data-order="<?= $res->Saldo ?>"><?= number_format($res->Saldo, 2, ',', '.') ?></td>
 											<td class="align-middle text-center">
 												<a href="banco_cadastro.php?CodConta=<?=$res->CodConta?>" class="btn btn-primary" title="Editar Conta"><i class="fa fa-pencil fa-lg fa-fw mr-0"></i></a>
 												<button class="btn btn-danger" title="Excluir Conta" onclick="deletaProduto(<?= $res->CodConta ?>)"><i class="fa fa-trash fa-lg fa-fw mr-0"></i></button>
@@ -94,6 +94,7 @@ $pageActive = 'banco';
 		<script type="text/javascript">
 			$('#tabela').DataTable({
 				bPaginate: false,
+				order: [ 1, "desc" ],
 				responsive: true,
 				language:{
 					url: 'js/plugins/datatables/traducao.json'
