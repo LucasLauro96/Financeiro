@@ -10,9 +10,13 @@ header('Content-Type: text/html; charset=utf-8');
 date_default_timezone_set('America/Sao_Paulo');
 setlocale(LC_TIME, 'pt_BR.utf-8', 'pt_BR.utf-8', 'portuguese');
 
+ini_set('display_errors',1);
+ini_set('display_startup_erros',1);
+error_reporting(E_ALL);
+
 class conexao{
 
-	private static $host = 'localhost;port=3307';
+	private static $host = 'localhost;port=3306';
 	private static $db = 'financeiro';
 	private static $usuario = 'root';
 	private static $senha = '20101996';
