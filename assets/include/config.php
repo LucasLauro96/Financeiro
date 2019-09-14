@@ -53,6 +53,9 @@ class autenticacao{
 		$usuario = $conexao->injection($usuario);//TRATAMENTO DO POST
 		$senha = $conexao->injection($senha);//TRATAMENTO DO POST
 
+		// TRATANDO O ERRO DE GROUP BY DO MYSQL 5.7, VERSÔES ANTERIORES DESNECESSARIO
+		$query = $con->query("SET sql_mode=(SELECT REPLACE(@@sql_mode,'ONLY_FULL_GROUP_BY',''))");
+
 		$query = $con->prepare('SELECT CodUsuario, Nome, COUNT(*) AS Quantidade FROM tb_usuario_adm WHERE Usuario = :usuario AND Senha = :senha');
 		$query->bindParam(':usuario', $usuario);
 		$query->bindParam(':senha', $senha);

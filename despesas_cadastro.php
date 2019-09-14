@@ -13,6 +13,7 @@ $pageActive = 'despesas';
 ?>
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
 	<title>Sistema Administrativo</title>
 	<meta charset="utf-8">
@@ -28,6 +29,7 @@ $pageActive = 'despesas';
 	<!-- Page specific css -->
 	<link rel="stylesheet" type="text/css" href="css/jquery.fancybox.min.css">
 </head>
+
 <body class="app sidebar-mini rtl">
 
 	<?php include_once "header.php"; ?>
@@ -61,7 +63,7 @@ $pageActive = 'despesas';
 									<textarea name="Descricao" id="Descricao" class="form-control" rows="6"></textarea>
 								</div>
 								<div class="col-md-12">
-									<button type="button" name="salvar" id="salvar" class="btn btn-primary d-block mx-auto mt-3"><i class="fa fa-save"></i> SALVAR</button>
+									<button type="submit" name="salvar" id="salvar" class="btn btn-primary d-block mx-auto mt-3"><i class="fa fa-save"></i> SALVAR</button>
 								</div>
 							</div>
 							<input type="hidden" name="CodDespesa" id="CodDespesa">
@@ -83,31 +85,42 @@ $pageActive = 'despesas';
 	<script src="js/plugins/jquery.validate.js"></script>
 	<script src="js/plugins/jquery.fancybox.min.js"></script>
 	<script>
-		
 		$('#formCadastro').validate({
 			errorClass: 'is-invalid',
 			validClass: 'is-valid',
-			errorPlacement: function(){
-				return false;//REMOVER MENSAGENS
+			errorPlacement: function() {
+				return false; //REMOVER MENSAGENS
 			},
-			submitHandler: function(form){
+			submitHandler: function(form) {
 				$('#salvar').html('<i class="fa fa-refresh fa-spin fa-3x fa-fw"></i> SALVANDO...').attr('disabled', '');
 
 				var formData = new FormData($('#formCadastro')[0]);
 				var option = $('#CodDespesa').val() == '' ? 'insert' : 'update';
-				
+
 				$.ajax({
 					type: 'POST',
-					url: 'ajax/despesa.php?option='+option,
-					data: formData ,
+					url: 'ajax/despesa.php?option=' + option,
+					data: formData,
 					processData: false,
 					contentType: false
-				}).done(function(){
+				}).done(function() {
 					//window.location.href = 'despesa_consulta.php';
 				});
 			}
 		});
+
+		<?php if (isset($_GET['CodDespesa']) && !empty($_GET['CodDespesa'])) { ?>
+			$.post('ajax/despesa.php?option=select', {CodDespesa: <?= $_GET['CodDespesa']?>})
+				.done(function(response) {
+					response = JSON.parse(response);
+
+					$('#DataDespesa').val(response.DataDespesa);
+					$('#Descricao').val(response.Descricao);
+					$('#Valor').val(response.Valor);
+				});
+		<?php } ?>
 	</script>
 
 </body>
+
 </html>

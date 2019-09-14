@@ -13,7 +13,16 @@ if (!isset($_GET['option']) || empty($_GET['option']))
 if (!isset($_POST) || empty($_POST))
     exit('POST required');
 
-if ($_GET['insert']) {
+if($_GET['option'] == 'select'){
+    $query = $con->prepare("CALL STP_S_Despesa(:CodDespesa)");
+    $query->bindValue(':CodDespesa', $_POST['CodDespesa']);
+    $query->execute();
+    $res = $query->fetch(PDO::FETCH_OBJ);
+
+    echo json_encode($res);
+}
+
+if ($_GET['option'] ==  'insert') {
 
     //TRATANDO O VALOR
     $Valor = str_replace('.', '', $_POST['Valor']);
