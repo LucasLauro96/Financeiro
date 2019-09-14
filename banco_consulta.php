@@ -13,6 +13,7 @@ $pageActive = 'banco';
 ?>
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
 	<title>Sistema Administrativo</title>
 	<meta charset="utf-8">
@@ -26,11 +27,12 @@ $pageActive = 'banco';
 	<link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
 	<link rel="icon" href="../favicon.ico" type="image/x-icon">
 	<!-- Page specific css -->
-	<link rel="stylesheet" type="text/css" href="css/datatables.min.css"/>
+	<link rel="stylesheet" type="text/css" href="css/datatables.min.css" />
 </head>
+
 <body class="app sidebar-mini rtl">
 
-	<?php include_once "header.php";?>
+	<?php include_once "header.php"; ?>
 
 	<main class="app-content">
 
@@ -55,71 +57,74 @@ $pageActive = 'banco';
 								</tr>
 							</thead>
 							<tbody>
-								<?php 
-									$query = $con->query("
+								<?php
+								$query = $con->query("
 										SELECT 
 											CodConta,
 											Banco,
 											Saldo
 										FROM
 											tb_conta");
-										
-									while($res = $query->fetch(PDO::FETCH_OBJ)){?>
-										<tr>
-											<td class="align-middle"><?= $res->Banco ?></td>
-											<td class="align-middle"  data-order="<?= $res->Saldo ?>"><?= number_format($res->Saldo, 2, ',', '.') ?></td>
-											<td class="align-middle text-center">
-												<a href="banco_cadastro.php?CodConta=<?=$res->CodConta?>" class="btn btn-primary" title="Editar Conta"><i class="fa fa-pencil fa-lg fa-fw mr-0"></i></a>
-												<button class="btn btn-danger" title="Excluir Conta" onclick="deletaProduto(<?= $res->CodConta ?>)"><i class="fa fa-trash fa-lg fa-fw mr-0"></i></button>
-											</td>
-										</tr>
-									<?php }?>
-								</tbody>
-							</table>
-						</div>
+
+								while ($res = $query->fetch(PDO::FETCH_OBJ)) { ?>
+									<tr>
+										<td class="align-middle"><?= $res->Banco ?></td>
+										<td class="align-middle" data-order="<?= $res->Saldo ?>"><?= number_format($res->Saldo, 2, ',', '.') ?></td>
+										<td class="align-middle text-center">
+											<a href="banco_cadastro.php?CodConta=<?= $res->CodConta ?>" class="btn btn-primary" title="Editar Conta"><i class="fa fa-pencil fa-lg fa-fw mr-0"></i></a>
+											<button class="btn btn-danger" title="Excluir Conta" onclick="deletaProduto(<?= $res->CodConta ?>)"><i class="fa fa-trash fa-lg fa-fw mr-0"></i></button>
+										</td>
+									</tr>
+								<?php } ?>
+							</tbody>
+						</table>
 					</div>
 				</div>
 			</div>
-		</main>
-		<!-- Essential javascripts for application to work-->
-		<script src="js/jquery-3.2.1.min.js"></script>
-		<script src="js/popper.min.js"></script>
-		<script src="js/bootstrap.min.js"></script>
-		<script src="js/main.js"></script>
-		<!-- The javascript plugin to display page loading on top-->
-		<script src="js/plugins/pace.min.js"></script>
-		<!-- Page specific javascripts-->
-		<script type="text/javascript" src="js/plugins/datatables/datatables.min.js"></script>
-		<script type="text/javascript" src="js/plugins/sweetalert.min.js"></script>
-		<script type="text/javascript">
-			$('#tabela').DataTable({
-				bPaginate: false,
-				order: [ 1, "desc" ],
-				responsive: true,
-				language:{
-					url: 'js/plugins/datatables/traducao.json'
-				}
-			});
+		</div>
+	</main>
+	<!-- Essential javascripts for application to work-->
+	<script src="js/jquery-3.2.1.min.js"></script>
+	<script src="js/popper.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script src="js/main.js"></script>
+	<!-- The javascript plugin to display page loading on top-->
+	<script src="js/plugins/pace.min.js"></script>
+	<!-- Page specific javascripts-->
+	<script type="text/javascript" src="js/plugins/datatables/datatables.min.js"></script>
+	<script type="text/javascript" src="js/plugins/sweetalert.min.js"></script>
+	<script type="text/javascript">
+		$('#tabela').DataTable({
+			bPaginate: false,
+			order: [1, "desc"],
+			responsive: true,
+			language: {
+				url: 'js/plugins/datatables/traducao.json'
+			}
+		});
 
-			function deletaProduto(CodConta){
-				swal({
-					title: 'Deletar este Conta?',
-					text: '',
-					type: 'warning',
-					showCancelButton: true,
-					confirmButtonText: 'Sim, deletar',
-					cancelButtonText: 'Não, cancelar',
-					closeOnConfirm: true,
-					closeOnCancel: true
-				}, function(isConfirm){
-					if(isConfirm){
-						$.post('ajax/banco.php?option=delete', {CodConta: CodConta})
-						.done(function(){
+		function deletaProduto(CodConta) {
+			swal({
+				title: 'Deletar este Conta?',
+				text: '',
+				type: 'warning',
+				showCancelButton: true,
+				confirmButtonText: 'Sim, deletar',
+				cancelButtonText: 'Não, cancelar',
+				closeOnConfirm: true,
+				closeOnCancel: true
+			}, function(isConfirm) {
+				if (isConfirm) {
+					$.post('ajax/banco.php?option=delete', {
+							CodConta: CodConta
+						})
+						.done(function() {
 							location.reload();
 						});
-					}
-				});
-			}
-		</script>
-	</body>
-	</html>
+				}
+			});
+		}
+	</script>
+</body>
+
+</html>
