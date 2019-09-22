@@ -40,7 +40,7 @@ $pageActive = 'despesas';
 			<div class="col-md-12">
 				<div class="tile">
 					<div class="tile-title-w-btn">
-						<h3 class="title"><i class="fa fa-list"></i> Produtos</h3>
+						<h3 class="title"><i class="fa fa-list"></i> Despesas</h3>
 						<p>
 							<a href="despesas_cadastro.php" class="btn btn-primary icon-btn">
 								<i class="fa fa-plus"></i> Nova Despesa
@@ -71,11 +71,11 @@ $pageActive = 'despesas';
 								while ($res = $query->fetch(PDO::FETCH_OBJ)) { ?>
 									<tr>
 										<td class="align-middle"><?= $res->CodDespesa ?></td>
-										<td class="align-middle"><?= date('d/m/Y', strtotime($res->DataDespesa)) ?></td>
+										<td class="align-middle" data-order="<?= date('Y-m-d', strtotime($res->DataDespesa)) ?>"><?= date('d/m/Y', strtotime($res->DataDespesa)) ?></td>
 										<td class="align-middle"><?= number_format($res->Valor, 2, ',', '.') ?></td>
 										<td class="align-middle text-center">
 											<a href="despesas_cadastro.php?CodDespesa=<?= $res->CodDespesa ?>" class="btn btn-primary" title="Editar Produto"><i class="fa fa-pencil fa-lg fa-fw mr-0"></i></a>
-											<button class="btn btn-danger" title="Excluir Despesa" onclick="deletaDepesa(<?= $res->CodProduto ?>)"><i class="fa fa-trash fa-lg fa-fw mr-0"></i></button>
+											<button class="btn btn-danger" title="Excluir Despesa" onclick="deletaDespesa(<?= $res->CodDespesa ?>)"><i class="fa fa-trash fa-lg fa-fw mr-0"></i></button>
 										</td>
 									</tr>
 								<?php } ?>
@@ -99,15 +99,16 @@ $pageActive = 'despesas';
 	<script type="text/javascript">
 		$('#tabela').DataTable({
 			bPaginate: false,
+			order: [1, "desc"],
 			responsive: true,
 			language: {
 				url: 'js/plugins/datatables/traducao.json'
 			}
 		});
 
-		function deletaProduto(CodProduto) {
+		function deletaDespesa(CodDespesa) {
 			swal({
-				title: 'Deletar este produto?',
+				title: 'Deletar esta despesa?',
 				text: '',
 				type: 'warning',
 				showCancelButton: true,
@@ -117,8 +118,8 @@ $pageActive = 'despesas';
 				closeOnCancel: true
 			}, function(isConfirm) {
 				if (isConfirm) {
-					$.post('ajax/produto.php?option=delete', {
-							CodProduto: CodProduto
+					$.post('ajax/despesa.php?option=delete', {
+							CodDespesa: CodDespesa
 						})
 						.done(function() {
 							location.reload();

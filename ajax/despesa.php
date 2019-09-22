@@ -39,3 +39,28 @@ if ($_GET['option'] ==  'insert') {
     echo json_encode($res);
 
 }
+
+if ($_GET['option'] ==  'update') {
+
+    //TRATANDO O VALOR
+    $Valor = str_replace('.', '', $_POST['Valor']);
+    $Valor = str_replace(',', '.', $Valor);
+
+    $query = $con->prepare("CALL STP_U_Despesa(:CodDespesa, :DataDespesa, :Valor, :Descricao)");
+    $query->bindValue(':CodDespesa', $_POST['CodDespesa']);
+    $query->bindValue(':DataDespesa', $_POST['DataDespesa']);
+    $query->bindValue(':Valor', $Valor);
+    $query->bindValue(':Descricao', $_POST['Descricao']);
+    $query->execute();
+    
+    $res = $query->fetch(PDO::FETCH_OBJ);
+
+    echo json_encode($res);
+
+}
+
+if ($_GET['option'] == 'delete') {
+    $query = $con->prepare('CALL STP_D_Despesa(:CodDespesa)');
+    $query->bindValue(':CodDespesa', $_POST['CodDespesa']);
+    $query->execute();
+}

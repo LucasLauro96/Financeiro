@@ -40,7 +40,7 @@ $pageActive = 'despesas';
 			<div class="col-md-12">
 				<div class="tile">
 					<div class="tile-title-w-btn">
-						<h3 class="title"><i class="fa fa-pencil"></i><?= empty($_GET['CodDespesa']) ? '  Novo Produto' : '  Atualiza Produto' ?></h3>
+						<h3 class="title"><i class="fa fa-pencil"></i><?= empty($_GET['CodDespesa']) ? '  Nova Despesa' : '  Atualiza Despesa' ?></h3>
 						<p>
 							<a href="despesas_consulta.php" class="btn btn-danger icon-btn">
 								<i class="fa fa-ban"></i> Cancelar
@@ -104,7 +104,7 @@ $pageActive = 'despesas';
 					processData: false,
 					contentType: false
 				}).done(function() {
-					//window.location.href = 'despesa_consulta.php';
+					window.location.href = 'despesas_consulta.php';
 				});
 			}
 		});
@@ -113,7 +113,8 @@ $pageActive = 'despesas';
 			$.post('ajax/despesa.php?option=select', {CodDespesa: <?= $_GET['CodDespesa']?>})
 				.done(function(response) {
 					response = JSON.parse(response);
-
+					
+					$('#CodDespesa').val(response.CodDespesa);
 					$('#DataDespesa').val(response.DataDespesa);
 					$('#Descricao').val(response.Descricao);
 					$('#Valor').val(response.Valor);
